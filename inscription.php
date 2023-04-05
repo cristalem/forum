@@ -1,11 +1,11 @@
 <?php session_start();
 include_once 'function/function.php';
-include_once 'function/inscription.class.php';/*on recupere les fonctions dont on a besoin*/
+include_once 'function/inscription.class.php';
 $bdd = bdd();
 
-if(isset($_POST['NOM']) AND isset($_POST['email']) AND isset($_POST['mdp'])  AND isset($_POST['mdp2'])){
+if(isset($_POST['pseudo']) AND isset($_POST['email']) AND isset($_POST['mdp'])  AND isset($_POST['mdp2'])){
   
-    $inscription = new inscription($_POST['NOM'],$_POST['email'],$_POST['mdp'],$_POST['mdp2']);
+    $inscription = new inscription($_POST['pseudo'],$_POST['email'],$_POST['mdp'],$_POST['mdp2']);
     $verif = $inscription->verif();
     if($verif == "ok"){/*Tout est bon*/
      if($inscription->enregistrement()){
@@ -46,8 +46,8 @@ if(isset($_POST['NOM']) AND isset($_POST['email']) AND isset($_POST['mdp'])  AND
     
             <div id="Cforum">
                 <form method="post" action="inscription.php">
-                    <p> 
-                        <input name="NOM" type="text" placeholder="NOM..." required /><br>
+                    <p>
+                        <input name="pseudo" type="text" placeholder="Pseudo..." required /><br>
                         <input name="email" type="text" placeholder="Adresse email..." required /><br>
                         <input name="mdp" type="password" placeholder="Mot de passe..." required /><br>
                         <input name="mdp2" type="password" placeholder="Confirmation..." required /><br>

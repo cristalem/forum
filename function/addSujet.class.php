@@ -1,5 +1,5 @@
-<?php include_once 'function.php';/*on recupere les fonctions dont on a besoin*/
-/*recuperation des donnees dans la base et definition de la classe*/ 
+<?php include_once 'function.php';
+
 class addSujet{
     
     private $name;
@@ -37,7 +37,7 @@ class addSujet{
         }
         
     }
-    /*ajout dans la base de donnees*/
+    
     public function insert(){
         
         $requete = $this->bdd->prepare('INSERT INTO sujet(name,categorie) VALUES(:name,:categorie)');
@@ -48,4 +48,5 @@ class addSujet{
         
         return 1;
     }
+    
 }

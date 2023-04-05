@@ -1,6 +1,6 @@
 <?php session_start();
 include_once 'function/function.php';
-include_once 'function/connexion.class.php';/*on recupere les fonctions dont on a besoin*/
+include_once 'function/connexion.class.php';
 $bdd = bdd();
 if(isset($_POST['pseudo']) AND isset($_POST['mdp'])){
     

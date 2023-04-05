@@ -1,6 +1,6 @@
 <?php session_start();
 include_once 'function/function.php';
-include_once 'function/addSujet.class.php';/*on recupere les fonctions dont on a besoin*/
+include_once 'function/addSujet.class.php';
 $bdd = bdd();
 
 

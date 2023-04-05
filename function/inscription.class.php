@@ -1,25 +1,22 @@
 <?php  session_start();
-include_once 'function.php'; /*on recupere les fonctions dont on a besoin*/
+include_once 'function.php'; 
 
 
 class inscription{
     
-   private $NOM;
-   private $Prenom;
+   private $pseudo;
    private $email;
    private $mdp;
    private $mdp2;
    private $bdd;
     
-    public function __construct($NOM,$Prenom,$email,$mdp,$mdp2){
+    public function __construct($pseudo,$email,$mdp,$mdp2){
         
         
-        $NOM = htmlspecialchars($NOM);
-        $Prenom = htmlspecialchars($Prenom);
+        $pseudo = htmlspecialchars($pseudo);
         $email = htmlspecialchars($email);
         
-        $this->NOM = $NOM; 
-        $this->Prenom = $Prenom;
+        $this->pseudo = $pseudo; 
         $this->email = $email;
         $this->mdp = $mdp;
         $this->mdp2 = $mdp2;
@@ -30,7 +27,7 @@ class inscription{
     
     public function verif(){
         
-        if(strlen($this->NOM) AND strlen($this->Prenom)  > 2 AND strlen($this->NOM) AND strlen($this->Prenom) < 20 ){ /*Si le NOM est bon*/
+        if(strlen($this->pseudo) > 3 AND strlen($this->pseudo) < 20 ){ /*Si le pseudo est bon*/
           
            $syntaxe = '#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#'; 
            if(preg_match($syntaxe,$this->email)){ /*email bon*/
@@ -57,8 +54,8 @@ class inscription{
                return $erreur;
            }
         }
-        else { /*NOM mauvais*/
-            $erreur = 'Le NOM doit contenir entre 3 et 20 caractères';
+        else { /*Pseudo mauvais*/
+            $erreur = 'Le pseudu doit contenir entre 3 et 20 caractères';
             return $erreur;
         }
         
@@ -67,10 +64,9 @@ class inscription{
     
     public function enregistrement(){
         
-        $requete = $this->bdd->prepare('INSERT INTO membre(NOM,Prenom,email,mdp) VALUES(:NOM,:Prenom,:email,:mdp)');
+        $requete = $this->bdd->prepare('INSERT INTO membre(pseudo,email,mdp) VALUES(:pseudo,:email,:mdp)');
         $requete->execute(array(
-            'NOM'=>  $this->NOM,
-            'Prenom'=>  $this->Prenom,
+            'pseudo'=>  $this->pseudo,
             'email' => $this->email,
             'mdp' => $this->mdp 
         ));
@@ -80,11 +76,11 @@ class inscription{
     }
     
     public function session(){
-        $requete = $this->bdd->prepare('SELECT id FROM membre WHERE NOM = :NOM ');
-        $requete->execute(array('NOM'=>  $this->NOM));
+        $requete = $this->bdd->prepare('SELECT id FROM membre WHERE pseudo = :pseudo ');
+        $requete->execute(array('pseudo'=>  $this->pseudo));
         $requete = $requete->fetch();
         $_SESSION['id'] = $requete['id'];
-        $_SESSION['NOM'] = $this->NOM;
+        $_SESSION['pseudo'] = $this->pseudo;
         
         return 1;
     }

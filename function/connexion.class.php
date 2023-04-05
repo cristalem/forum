@@ -1,4 +1,4 @@
-<?php include_once 'function.php';/*on recupere les fonctions dont on a besoin*/
+<?php include_once 'function.php';
 
 class connexion{
     

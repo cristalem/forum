@@ -1,7 +1,5 @@
-
-
 <?php
-/*creation de la base de donnees*/
+
 function bdd(){
      try
 {
@@ -10,7 +8,6 @@ function bdd(){
 }
 catch (Exception $e)
 {
-        /* si erreur afficher un message*/
         die('Erreur : ' . $e->getMessage());
 }
 return $bdd;
